@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Game code</mat-label>
+  <input matInput [value]="gameCode" disabled>
+  <button matSuffix mat-icon-button (click)="copyToClipboard()">
+    <mat-icon>assignment</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+  <mat-chip-option *ngFor="let user of users">
+    {{user.name}}
+  </mat-chip-option>
+</mat-chip-listbox>
+
+<mat-form-field>
+  <button mat-raised-button>CLOSE GAME</button>
+  <button mat-raised-button (click)="startSession()">START GAME</button>
+</mat-form-field>
