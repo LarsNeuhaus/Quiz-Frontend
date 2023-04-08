@@ -27,7 +27,6 @@ export class LobbyComponent implements OnInit {
       };
       this.gameSession = state.gameSession;
     }
-    console.log(this.gameSession);
   }
 
   copyToClipboard() {
