@@ -1,13 +1,13 @@
 <mat-form-field>
   <mat-label>Game code</mat-label>
-  <input matInput [value]="gameCode" disabled>
+  <input matInput [value]="gameSession.id" disabled>
   <button matSuffix mat-icon-button (click)="copyToClipboard()">
     <mat-icon>assignment</mat-icon>
   </button>
 </mat-form-field>
 
 <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
-  <mat-chip-option *ngFor="let user of users">
+  <mat-chip-option *ngFor="let user of gameSession.users">
     {{user.name}}
   </mat-chip-option>
 </mat-chip-listbox>

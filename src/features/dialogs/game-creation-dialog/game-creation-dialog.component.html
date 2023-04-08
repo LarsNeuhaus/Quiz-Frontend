@@ -3,9 +3,9 @@
   <div class="row">
     <mat-form-field class="example-form-field" appearance="fill">
       <mat-label>Game title</mat-label>
-      <input [formControl]="gameTitleInputControl" matInput type="text" [(ngModel)]="gameTitle" required>
+      <input [formControl]="gameTitleInputControl" matInput type="text" required>
       <mat-error *ngIf="gameTitleInputControl.invalid">Title required</mat-error>
-      <button *ngIf="gameTitle" matSuffix mat-icon-button aria-label="Clear" (click)="gameTitle=''">
+      <button *ngIf="gameTitleInputControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="gameTitleInputControl.setValue('')">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -14,7 +14,7 @@
   <div class="row">
     <mat-form-field appearance="fill">
       <mat-label>Main category</mat-label>
-      <mat-select [formControl]="mainCategorySelectControl" [(ngModel)]="selectedMainCategory" required>
+      <mat-select [formControl]="mainCategorySelectControl" required>
         <mat-option *ngFor="let mainCategory of mainCategories" [value]="mainCategory">
           {{mainCategory}}
         </mat-option>

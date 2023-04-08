@@ -9,12 +9,10 @@ import {SessionModel} from "../../../app/models/session.model";
   styleUrls: ['./game-creation-dialog.component.scss']
 })
 export class GameCreationDialogComponent {
-  gameTitle: string = '';
   gameTitleInputControl = new FormControl('', [Validators.required]);
   mainCategories: string[] = ['Christmas', 'Sports', 'Summer', 'Spring'];
-  selectedMainCategory: string = '';
   mainCategorySelectControl = new FormControl('', [Validators.required]);
-  subCategoriesSelectControl = new FormControl('', [Validators.required]);
+  subCategoriesSelectControl: FormControl<string[] | null> = new FormControl([''], [Validators.required]);
   subCategories: string[] = ['Food', 'Games', 'Music', 'Countries', 'Flowers', 'Animals'];
 
 
@@ -28,6 +26,8 @@ export class GameCreationDialogComponent {
   }
 
   setSessionSettings() {
-    //this.gameSession.subCategories = this.subCategoriesSelectControl.value;
+    this.gameSession.subCategories = this.subCategoriesSelectControl.value === null ? [''] : this.subCategoriesSelectControl.value;
+    this.gameSession.mainCategory = this.mainCategorySelectControl.value === null ? '' : this.mainCategorySelectControl.value;
+    this.gameSession.title = this.gameTitleInputControl.value === null ? '' : this.gameTitleInputControl.value;
   }
 }
