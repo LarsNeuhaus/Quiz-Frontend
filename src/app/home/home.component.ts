@@ -13,6 +13,7 @@ import {HomeService} from "./home.service";
 })
 export class HomeComponent {
   private gameSession: SessionModel = {title: '', id: '', subCategories: [], mainCategory: '', questions:[], users: []};
+  joinCode: string = '';
   constructor(private dialog: MatDialog,
               private router: Router,
               private homeService: HomeService) {
@@ -37,6 +38,20 @@ export class HomeComponent {
   }
 
   openJoinDialog() {
-    const dialogRef = this.dialog.open(GameJoinDialogComponent);
+    const dialogRef = this.dialog.open(GameJoinDialogComponent, {
+      data: this.joinCode
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.gameSession = this.homeService.getGameSession(this.joinCode);
+        const navigationExtras: NavigationExtras = {
+          state: {
+            gameSession: this.gameSession
+          }
+        };
+        this.router.navigate(['/lobby'], navigationExtras);
+      }
+    });
   }
 }

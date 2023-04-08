@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {SessionModel} from "../models/session.model";
 
+const gameSessions: SessionModel[] = [];
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +12,14 @@ export class HomeService {
   }
 
   createGameSession(session: SessionModel) {
-    const randomNumber = Math.random() * 1000;
-    session.id = `#gameCode-${randomNumber}`;
+    session.id = `#gameCode-${gameSessions.length + 1}`;
+    gameSessions.push(session);
     return session;
+  }
+
+  getGameSession(joinCode: string) {
+    return gameSessions.filter(session => {
+      return session.id === joinCode;
+    })[0];
   }
 }

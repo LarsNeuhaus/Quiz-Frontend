@@ -2,15 +2,15 @@
 <mat-dialog-content>
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Game code</mat-label>
-    <input [formControl]="gameCodeInputControl" matInput type="text" [(ngModel)]="gameCode" required>
+    <input [formControl]="gameCodeInputControl" matInput type="text" required>
     <mat-error *ngIf="gameCodeInputControl.invalid">Input required</mat-error>
-    <button *ngIf="gameCode" matSuffix mat-icon-button aria-label="Clear" (click)="gameCode=''">
+    <button *ngIf="gameCodeInputControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="gameCodeInputControl.setValue('')">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-raised-button [mat-dialog-close]="false">CANCEL</button>
-  <button mat-raised-button [mat-dialog-close]="true" [disabled]="gameCodeInputControl.invalid">JOIN</button>
+  <button mat-raised-button [mat-dialog-close]="true" [disabled]="gameCodeInputControl.invalid" (click)="emitJoinEvent()">JOIN</button>
 </mat-dialog-actions>
 

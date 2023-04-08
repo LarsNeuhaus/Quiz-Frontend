@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 
 @Component({
@@ -7,7 +7,13 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./game-join-dialog.component.scss']
 })
 export class GameJoinDialogComponent {
-  public gameCode: string = '';
+  @Output()
+  joinEvent: EventEmitter<string> = new EventEmitter<string>();
   gameCodeInputControl = new FormControl('', [Validators.required]);
 
+  emitJoinEvent() {
+    if (this.gameCodeInputControl.value) {
+      this.joinEvent.emit(this.gameCodeInputControl.value);
+    }
+  }
 }
